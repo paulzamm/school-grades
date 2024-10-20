@@ -1,0 +1,61 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<mat-card *ngIf="!loading" class="mx-20 my-4">
+    <mat-card-title>
+        <mat-toolbar color="secondary">
+            <span>Registro de Notas</span>
+            <button mat-raised-button color="primary" class="ml-auto" (click)="createNota()">
+                    <mat-icon>add</mat-icon>
+                    <span>Agregar Nota</span>
+                </button>
+        </mat-toolbar>
+        <mat-form-field class="w-full">
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="filterNotasData($event)" #input>
+        </mat-form-field>
+    </mat-card-title>
+    <mat-card-content class="dashboard-card-content">
+        <div class="mat-elevation-z8" style="overflow: auto;">
+            <table mat-table [dataSource]="notaData">
+                <!-- Nombre Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef class="w-15"> Estudiante </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+
+                <!-- Asignatura Real Column -->
+                <ng-container matColumnDef="asignatura">
+                    <th mat-header-cell *matHeaderCellDef class="w-15">Asignatura </th>
+                    <td mat-cell *matCellDef="let element"> {{element.asignatura}} </td>
+                </ng-container>
+
+                <!-- Promedio Column -->
+                <ng-container matColumnDef="promedio">
+                    <th mat-header-cell *matHeaderCellDef class="w-15"> Promedio </th>
+                    <td mat-cell *matCellDef="let element"> {{element.promedio}} </td>
+                </ng-container>
+
+                <!-- Estado Column -->
+                <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef class="w-15"> Estado </th>
+                    <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef class="w-5">Acciones</th>
+                    <td mat-cell *matCellDef="let element" style="text-align: start;">
+                        <a class="pointer text-sky-700" matTooltip="Ver Registro" (click)="vetNota(element)">
+                            <mat-icon>visibility</mat-icon>
+                        </a>
+                        <a class="pointer text-red-500" matTooltip="Eliminar Registro" (click)="deleteNota(element._id)">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </mat-card-content>
+</mat-card>

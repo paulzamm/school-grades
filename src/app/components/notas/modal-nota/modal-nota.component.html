@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>{{ accionTitle }} Nota</h2>
+<hr>
+<mat-dialog-content>
+    <form [formGroup]="notasForm">
+        <div>
+            <div>
+                <mat-grid-list cols="1" rowHeight="80px">
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Estudiante</mat-label>
+                            <input matInput autocomplete="off" formControlName="nombre">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Asignatura</mat-label>
+                            <input matInput autocomplete="off" formControlName="asignatura">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Nota Parcial 1</mat-label>
+                            <input matInput formControlName="parcial1">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Nota Parcial 2</mat-label>
+                            <input matInput formControlName="parcial2">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button *ngIf="accionButton !== 'VerNota'" mat-raised-button color="primary" [disabled]="notasForm.invalid" (click)="guardarNota()">{{ accionButton }}</button>
+</mat-dialog-actions>
