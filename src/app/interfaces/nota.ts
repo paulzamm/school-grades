@@ -1,5 +1,5 @@
 export interface Nota {
-    _id?: string;
+    id?: string;
     nombre: string;
     asignatura: string;
     parcial1: number;
